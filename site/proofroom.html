@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proofroom, AI review for film teams — Kritika Singh</title>
+  <meta name="description" content="Designing AI features that tag footage, compare versions and suggest reviewers, and always show how sure they are before acting.">
+  <meta property="og:title" content="Proofroom — Kritika Singh">
+  <meta property="og:image" content="https://kritikacsingh.com/img/proofroom-workspace.webp">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-head">
+      <a class="name" href="/">Kritika Singh</a>
+      <nav aria-label="Main">
+        <a href="/">Work</a>
+        <a href="about.html">About</a>
+        <a href="kritika-singh-cv.pdf">CV</a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="cs-head">
+        <p class="project">Proofroom</p>
+        <h1>Making AI review feel like a trusted collaborator, not a black box.</h1>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Lead UX Designer at Gravitad</dd></div>
+          <div><dt>When</dt><dd>2024–2026</dd></div>
+          <div><dt>Platforms</dt><dd>Desktop and mobile</dd></div>
+          <div><dt>Made with</dt><dd>Figma, Claude, Cursor</dd></div>
+        </dl>
+      </header>
+
+      <section class="story">
+        <div>
+          <h2>Starting point</h2>
+          <p>Video production teams were losing days getting feedback to the right people. Twelve interviews across two studios showed the problem wasn't review quality but access: who needed to see what, and when. I designed three AI features to close that gap: tagging footage, comparing versions, and routing reviews.</p>
+        </div>
+        <div>
+          <h2>Outcome</h2>
+          <p>A review workspace where the AI does the sorting but people stay in charge. It shows how sure it is, and it asks before anything reaches another person. After four rounds of usability testing, editing cycles were 65% faster and task completion reached 92%.</p>
+        </div>
+      </section>
+
+      <aside class="note">
+        <p>The original product is no longer online, so these screens are recreated and refined from my original designs, rebuilt with Figma, Claude and Cursor. The outcomes above come from the version that shipped.</p>
+      </aside>
+
+      <figure class="fig">
+        <div class="plate">
+          <img src="img/proofroom-workspace.webp" width="2400" height="1967" loading="lazy"
+               alt="The review workspace. Versions on the left, the player and a timeline marking four AI-detected changes in the centre, and the Assist panel on the right.">
+        </div>
+        <figcaption>The review workspace. Everything the AI found lives in one panel, in one colour, so people learn that teal means "the AI did this".</figcaption>
+      </figure>
+
+      <section class="chapter" aria-labelledby="behaviour">
+        <h2 id="behaviour">When the AI acts, and when it asks</h2>
+        <div class="prose">
+          <p>Every AI suggestion follows two questions: how sure is it, and would acting reach anyone besides you? The answers decide whether it acts quietly, asks first, or waits.</p>
+        </div>
+
+        <div class="behaviour">
+          <div class="matrix" role="table" aria-label="How Assist behaves, by confidence and by who an action affects">
+            <span class="corner" aria-hidden="true"></span>
+            <span class="axis axis-x" role="columnheader">Confident</span>
+            <span class="axis axis-x" role="columnheader">Unsure</span>
+
+            <span class="axis axis-y" role="rowheader">Only affects you</span>
+            <div class="cell" role="cell" data-q="Confident, only affects you">
+              <h3>Applies it quietly</h3>
+              <p>No score shown. One click to undo.</p>
+              <span class="eg">Tags like Exterior, Golden hour</span>
+            </div>
+            <div class="cell ask" role="cell" data-q="Unsure, only affects you">
+              <h3>Asks you to confirm</h3>
+              <p>Shows its confidence, explains why, and lets you fix it.</p>
+              <span class="eg">Location tag at 62%</span>
+            </div>
+
+            <span class="axis axis-y" role="rowheader">Reaches other people</span>
+            <div class="cell" role="cell" data-q="Confident, reaches other people">
+              <h3>Drafts it, then waits</h3>
+              <p>Nothing is sent until you accept.</p>
+              <span class="eg">Suggested reviewers</span>
+            </div>
+            <div class="cell" role="cell" data-q="Unsure, reaches other people">
+              <h3>Flags it, suggests nothing</h3>
+              <p>Points at the change and leaves the decision to you.</p>
+              <span class="eg">Music cue change at 58%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="fig" aria-label="Correcting the AI">
+        <div class="strip">
+          <figure>
+            <div class="plate"><img src="img/tags-1-uncertain.webp" width="744" height="660" loading="lazy" alt="Tags card with an uncertain location tag, Hook Head, at 62% confidence, and Accept, Edit and Why options."></div>
+            <figcaption><span class="step">1</span>The AI isn't sure, so it says so and asks.</figcaption>
+          </figure>
+          <figure>
+            <div class="plate"><img src="img/tags-2-editing.webp" width="744" height="660" loading="lazy" alt="The location tag being edited to Hook Head Lighthouse, with the AI's original suggestion shown underneath."></div>
+            <figcaption><span class="step">2</span>You correct it. Its original guess stays visible.</figcaption>
+          </figure>
+          <figure>
+            <div class="plate"><img src="img/tags-3-corrected.webp" width="744" height="660" loading="lazy" alt="The corrected tag marked with a check, and a note that Assist will suggest it for other takes, with Undo."></div>
+            <figcaption><span class="step">3</span>It remembers the fix for the next takes, and you can undo it.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="fig detail" aria-label="Details">
+        <figure>
+          <div class="plate"><img src="img/detail-approve.webp" width="1354" height="80" loading="lazy" alt="Header with an Approve v3 button and a warning beside it: 2 suggested reviews not sent."></div>
+          <figcaption>Approving is never blocked, but the button tells you what's still open.</figcaption>
+        </figure>
+        <figure style="margin-top:24px">
+          <div class="plate"><img src="img/detail-timeline.webp" width="1506" height="397" loading="lazy" alt="Timeline with numbered comment markers above and teal bands marking four AI-detected changes across video and audio tracks."></div>
+          <figcaption>Comments and AI findings share one timeline, so you can see where people and the AI noticed the same thing. The dashed band is the one change it isn't sure about.</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" aria-labelledby="compare">
+        <h2 id="compare">Seeing what changed between versions</h2>
+        <div class="prose">
+          <p>Comparing cuts used to mean watching both versions and taking notes. Now a wipe shows them side by side, and the AI lines up every change on a shared timeline.</p>
+        </div>
+      </section>
+      <figure class="fig" style="padding-top:clamp(32px,5vw,48px)">
+        <div class="plate">
+          <img src="img/proofroom-compare.webp" width="2400" height="1733" loading="lazy"
+               alt="Version comparison. A wipe splits the frame: v2 on the left is cool with blown sea glare, v3 on the right is warm. Below, v2 and v3 timelines are stacked with matched changes linked.">
+        </div>
+        <figcaption>The wipe sits on the grade change, so the problem in v2 and the fix in v3 are visible in one frame.</figcaption>
+      </figure>
+
+      <section class="chapter" aria-labelledby="mobile">
+        <h2 id="mobile">Approving from anywhere</h2>
+        <div class="prose">
+          <p>Producers approve cuts between meetings and on set. The phone app keeps the same rules as the desktop: the AI's drafts wait for you, and approval tells you what's still open.</p>
+        </div>
+      </section>
+      <figure class="fig" style="padding-top:clamp(32px,5vw,48px)">
+        <div class="phones">
+          <img src="img/mobile-inbox.webp" width="786" height="1704" loading="lazy" alt="Mobile inbox titled Waiting on you, with SC42 v3 ready for approval, an Assist card with two suggested reviewers, and a new upload.">
+          <img src="img/mobile-review.webp" width="786" height="1704" loading="lazy" alt="Mobile review of SC42 v3 with the film frame, a scrubber marking comments and changes, the list of changes since v2, and Approve and Request changes buttons.">
+        </div>
+        <figcaption>Part of the revisited version: the original was desktop only.</figcaption>
+      </figure>
+
+      <nav class="next" aria-label="More">
+        <a href="/">All work</a>
+        <a href="about.html">About me</a>
+      </nav>
+    </main>
+
+    <footer class="site-foot">
+      <ul>
+        <li><a href="mailto:singhkritika832@gmail.com">singhkritika832@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/kritikasinghdesigner">LinkedIn</a></li>
+        <li><a href="https://github.com/kritikacsingh-ai">GitHub</a></li>
+      </ul>
+      <p>Designed and built by me, with Claude and Cursor.</p>
+    </footer>
+  </div>
+</body>
+</html>
