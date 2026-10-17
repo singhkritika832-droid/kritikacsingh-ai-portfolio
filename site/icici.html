@@ -97,14 +97,30 @@
       <section class="chapter" aria-labelledby="flows">
         <h2 id="flows">One decision per screen</h2>
         <div class="prose">
-          <p>Interviews named session timeouts as the biggest frustration. Losing everything read as the bank losing track of you. Splitting verification into single screens meant an error or timeout only cost one step.</p>
+          <p>Interviews named session timeouts as the biggest frustration. Losing everything read as the bank losing track of you. Splitting login into single screens meant an error or timeout only cost one step, and each screen asks for just one thing.</p>
         </div>
       </section>
-      <figure class="fig" style="padding-top:clamp(32px,5vw,48px)">
-        <div class="plate">
-          <img src="img/icici-flow-userid.webp" width="2400" height="1200" loading="lazy" alt="Login via User ID, screen by screen: landing, User ID, password, OTP, dashboard.">
+      <section class="fig" style="padding-top:clamp(32px,5vw,48px)" aria-label="Logging in with a User ID">
+        <div class="strip">
+          <figure>
+            <div class="plate"><img src="img/icici-uid-1.webp" width="900" height="725" loading="lazy" alt="Login panel with User ID and Mobile Number tabs, an empty User ID field and a disabled Proceed button."></div>
+            <figcaption><span class="step">1</span>Only the User ID. Proceed stays off until there's something to send.</figcaption>
+          </figure>
+          <figure>
+            <div class="plate"><img src="img/icici-uid-2.webp" width="900" height="725" loading="lazy" alt="The User ID filled in and the Proceed button now active."></div>
+            <figcaption><span class="step">2</span>Once it's filled, Proceed turns on.</figcaption>
+          </figure>
+          <figure>
+            <div class="plate"><img src="img/icici-uid-3.webp" width="900" height="725" loading="lazy" alt="Password step showing the customer's name and photo, a masked User ID with Edit, a Show password toggle, a Go directly to menu and a Securely login button."></div>
+            <figcaption><span class="step">3</span>Your name and photo confirm it's your account before you type a password. Choose where to land, then log in.</figcaption>
+          </figure>
         </div>
-        <figcaption>Logging in with a User ID: landing, User ID, password, OTP, then the dashboard.</figcaption>
+      </section>
+      <figure class="fig" style="padding-top:24px">
+        <div class="plate">
+          <img src="img/icici-dashboard.webp" width="1920" height="1974" loading="lazy" alt="Net banking dashboard after login: balances, financial health score, loans, recent transactions, credit cards, bills, insurance and investments.">
+        </div>
+        <figcaption>Where you land: the redesigned dashboard, built from the same design system as the login.</figcaption>
       </figure>
       <figure class="fig" style="padding-top:24px">
         <div class="plate">
