@@ -85,13 +85,18 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.02em; }
 /* Name and summary sit above the picture */
 .feature-meta {
   order: -1;
-  display: grid; grid-template-columns: 1fr auto; gap: .25rem 2rem; align-items: baseline;
+  display: grid; grid-template-columns: 1fr auto; gap: .5rem 2rem; align-items: center;
   padding-block: 0 20px;
 }
 .feature-meta h2 { font-size: var(--step-2); }
 .feature:hover h2 { color: var(--accent); }
-.feature-meta .kind { color: var(--muted); }
-.feature-meta p { grid-column: 1 / -1; color: var(--muted); max-width: 52ch; margin: 0; }
+.feature-meta .tags { justify-self: end; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.feature-meta .kind {
+  white-space: nowrap;
+  padding: 5px 14px; border: 1px solid var(--ink); border-radius: 999px;
+  font-size: var(--step--1); line-height: 1.2; color: var(--ink);
+}
+.feature-meta p { grid-column: 1 / -1; color: var(--muted); margin: 0; }
 
 /* Project list */
 .section { padding-block: clamp(72px, 10vw, 128px) 0; }
@@ -273,3 +278,8 @@ figcaption { color: var(--muted); font-size: var(--step--1); margin-top: 12px; m
 
 /* Small archival screenshots: show near their real size so they stay sharp */
 .fig.before .plate { max-width: 680px; background: #fff; }
+
+@media (max-width: 640px) {
+  .feature-meta { grid-template-columns: 1fr; }
+  .feature-meta .tags { justify-self: start; justify-content: flex-start; }
+}
