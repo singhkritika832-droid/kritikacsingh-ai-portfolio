@@ -72,7 +72,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.02em; }
 .intro p { margin-top: 1.75rem; color: var(--muted); font-size: var(--step-1); line-height: 1.45; max-width: 34ch; }
 
 /* Featured project */
-.feature { display: block; color: inherit; text-decoration: none; }
+.feature { display: flex; flex-direction: column; color: inherit; text-decoration: none; }
 .feature .shot { border-radius: 10px; overflow: hidden; background: var(--plate); }
 .feature .shot img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 .feature:hover .shot img { transform: scale(1.012); }
@@ -82,9 +82,11 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.02em; }
   .feature .shot.phones img { border-radius: 12px; }
 }
 .feature .shot.phones img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+/* Name and summary sit above the picture */
 .feature-meta {
+  order: -1;
   display: grid; grid-template-columns: 1fr auto; gap: .25rem 2rem; align-items: baseline;
-  padding-block: 20px 0;
+  padding-block: 0 20px;
 }
 .feature-meta h2 { font-size: var(--step-2); }
 .feature:hover h2 { color: var(--accent); }
