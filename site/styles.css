@@ -203,6 +203,23 @@ figcaption { color: var(--muted); font-size: var(--step--1); margin-top: 12px; m
 .phones figure figcaption { text-align: left; }
 @media (max-width: 760px) { .phones.three { grid-template-columns: minmax(0, 18rem); } }
 
+/* ICICI: login paths before and after */
+.paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: clamp(32px, 5vw, 48px); }
+.paths .cell { min-height: 0; gap: .75rem; }
+.paths .label { color: var(--muted); font-size: var(--step--1); }
+.route { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.route li {
+  display: flex; align-items: baseline; gap: .6rem; padding: 10px 12px; border-radius: 6px;
+  background: var(--paper); font-size: var(--step--1); line-height: 1.4;
+}
+.route li::before { content: "↓"; color: var(--muted); flex: none; }
+.route li:first-child::before { content: "→"; }
+.route li.dead { background: #F6E9E6; color: #8A2A1B; }
+.route li.dead::before { content: "✕"; color: #8A2A1B; }
+.route li.ok { background: #E7F1EC; color: #1F5B43; }
+.route li.ok::before { content: "✓"; color: #1F5B43; }
+@media (max-width: 760px) { .paths { grid-template-columns: 1fr; } }
+
 .strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .strip figure .plate { background: #171614; }
 .strip figcaption { margin-top: 10px; }

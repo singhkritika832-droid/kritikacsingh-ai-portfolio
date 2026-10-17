@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICICI Bank, a login designed around forgetting — Kritika Singh</title>
+  <meta name="description" content="Redesigning ICICI Bank's net banking login and verification around recovery: verification completion rose from 60% to 82%.">
+  <meta property="og:title" content="ICICI Bank — Kritika Singh">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-head">
+      <a class="name" href="/">Kritika Singh</a>
+      <nav aria-label="Main">
+        <a href="/">Work</a>
+        <a href="about.html">About</a>
+        <a href="kritika-singh-cv.pdf">CV</a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="cs-head">
+        <p class="project">ICICI Bank</p>
+        <h1>Designing a bank login around forgetting.</h1>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>UX Designer at Sparklin Innovation, for ICICI Bank</dd></div>
+          <div><dt>When</dt><dd>2022, three months</dd></div>
+          <div><dt>Platforms</dt><dd>Net banking on web and mobile</dd></div>
+          <div><dt>Worked with</dt><dd>Product, engineering, QA</dd></div>
+        </dl>
+      </header>
+
+      <section class="story">
+        <div>
+          <h2>Starting point</h2>
+          <p>ICICI is India's largest private-sector bank, with 79M+ retail customers. Most of them open net banking only every few months, yet the login assumed they'd remember a User ID, get through one long form in a single go, and never time out. "Forgot User ID" was the biggest onboarding support ticket, and only 60% of people finished verification.</p>
+        </div>
+        <div>
+          <h2>Outcome</h2>
+          <p>A login with two ways in, recovery without leaving the screen, and verification split into steps that save as you go, all built on a new design system shared by web and mobile. Verification completion rose from 60% to 82%, onboarding got 25% faster, and time to first transaction fell 35%.</p>
+        </div>
+      </section>
+
+      <p class="reframe">The form wasn't the problem. The whole flow assumed nothing would go wrong: no forgotten ID, no timeout, no interruption. For people who log in a few times a year, forgetting is the normal case, so I redesigned around recovery.</p>
+
+      <figure class="fig">
+        <div class="plate">
+          <img src="img/icici-before.webp" width="1600" height="1000" loading="lazy" alt="The original ICICI net banking login: a single User ID and password form.">
+        </div>
+        <figcaption>The login I inherited: one way in, and nowhere to go if you'd forgotten your User ID.</figcaption>
+      </figure>
+
+      <section class="chapter" aria-labelledby="paths">
+        <h2 id="paths">From one way in to a way back</h2>
+        <div class="prose">
+          <p>I ran 20+ interviews and 7 heuristic reviews across web and mobile, and traced the funnel and support tickets. They pointed at the same moment: someone who can't remember their User ID has no way forward.</p>
+        </div>
+        <div class="paths">
+          <div class="cell">
+            <h3>Before</h3>
+            <ol class="route">
+              <li>Enter User ID</li>
+              <li>Can't remember it</li>
+              <li class="dead">Call support, or give up</li>
+            </ol>
+            <p class="label">One long verification form. An error or timeout anywhere erased everything.</p>
+          </div>
+          <div class="cell">
+            <h3>After</h3>
+            <ol class="route">
+              <li>Log in with User ID, or with your registered mobile number</li>
+              <li>Forgot your ID? Get it right there, using your bank account, debit, credit or travel card</li>
+              <li class="ok">Back in, without a phone call</li>
+            </ol>
+            <p class="label">Verification on separate screens. Each step saves, and you can see how much is left.</p>
+          </div>
+        </div>
+      </section>
+
+      <figure class="fig">
+        <div class="plate">
+          <img src="img/icici-login.webp" width="2400" height="1500" loading="lazy" alt="Redesigned ICICI login with User ID and Mobile Number tabs given equal weight.">
+        </div>
+        <figcaption>The new login gives User ID and mobile number equal weight. Both go through the same security checks, so neither feels like a lesser way in.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <div class="plate">
+          <img src="img/icici-recovery.webp" width="2400" height="1500" loading="lazy" alt="Get User ID screen: step-by-step fields with clear labels and inline validation.">
+        </div>
+        <figcaption>Getting your User ID back now happens in the flow, with errors caught as you type, instead of on a support call.</figcaption>
+      </figure>
+
+      <section class="chapter" aria-labelledby="flows">
+        <h2 id="flows">One decision per screen</h2>
+        <div class="prose">
+          <p>Interviews named session timeouts as the biggest frustration. Losing everything read as the bank losing track of you. Splitting verification into single screens meant an error or timeout only cost one step.</p>
+        </div>
+      </section>
+      <figure class="fig" style="padding-top:clamp(32px,5vw,48px)">
+        <div class="plate">
+          <img src="img/icici-flow-userid.webp" width="2400" height="1200" loading="lazy" alt="Login via User ID, screen by screen: landing, User ID, password, OTP, dashboard.">
+        </div>
+        <figcaption>Logging in with a User ID: landing, User ID, password, OTP, then the dashboard.</figcaption>
+      </figure>
+      <figure class="fig" style="padding-top:24px">
+        <div class="plate">
+          <img src="img/icici-flow-mobile.webp" width="2400" height="1200" loading="lazy" alt="Login via mobile number and ATM PIN, screen by screen.">
+        </div>
+        <figcaption>The alternative path, with mobile number and ATM PIN, reaching the same dashboard.</figcaption>
+      </figure>
+
+      <section class="chapter" aria-labelledby="system">
+        <h2 id="system">A design system underneath it all</h2>
+        <div class="prose">
+          <p>Every heuristic review flagged web and mobile behaving differently, at exactly the moment people needed to trust the bank. So I built ICICI's design system from scratch: token architecture, 80+ components and documentation, held to WCAG 2.1 AA and adopted by other engineering teams.</p>
+        </div>
+      </section>
+      <figure class="fig" style="padding-top:clamp(32px,5vw,48px)">
+        <div class="plate">
+          <img src="img/icici-system-1.webp" width="2400" height="1500" loading="lazy" alt="Design system component library: accordions, buttons, checkboxes, tables, date pickers, dropdowns and forms.">
+        </div>
+        <figcaption>The component library behind login, verification and every screen after them.</figcaption>
+      </figure>
+      <figure class="fig" style="padding-top:24px">
+        <div class="plate">
+          <img src="img/icici-system-2.webp" width="2400" height="1500" loading="lazy" alt="Design system pattern documentation.">
+        </div>
+        <figcaption>Pattern documentation, so the consistent version is also the easiest one to reuse.</figcaption>
+      </figure>
+
+      <section class="chapter" aria-labelledby="impact">
+        <h2 id="impact">What changed after launch</h2>
+        <dl class="stats">
+          <div><dt>82%</dt><dd>verification completion, up from 60%</dd></div>
+          <div><dt>25%</dt><dd>less time to complete onboarding</dd></div>
+          <div><dt>35%</dt><dd>less time to a first transaction</dd></div>
+          <div><dt>80+</dt><dd>components in a design system shared by web and mobile</dd></div>
+        </dl>
+      </section>
+
+      <nav class="next" aria-label="More">
+        <a href="hazedawn.html">Previous: Hazedawn</a>
+        <a href="/">All work</a>
+      </nav>
+    </main>
+
+    <footer class="site-foot">
+      <ul>
+        <li><a href="mailto:singhkritika832@gmail.com">singhkritika832@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/kritikasinghdesigner">LinkedIn</a></li>
+        <li><a href="https://github.com/kritikacsingh-ai">GitHub</a></li>
+      </ul>
+      <p>Designed and built by me, with Claude and Cursor.</p>
+    </footer>
+  </div>
+</body>
+</html>
