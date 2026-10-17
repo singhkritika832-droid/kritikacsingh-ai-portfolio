@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hazedawn, issue reporting for construction sites — Kritika Singh</title>
+  <meta name="description" content="A three-step reporting flow designed for one free hand, bad light and constant interruption on construction sites.">
+  <meta property="og:title" content="Hazedawn — Kritika Singh">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-head">
+      <a class="name" href="/">Kritika Singh</a>
+      <nav aria-label="Main">
+        <a href="/">Work</a>
+        <a href="about.html">About</a>
+        <a href="kritika-singh-cv.pdf">CV</a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="cs-head">
+        <p class="project">Hazedawn</p>
+        <h1>Designing for one free hand, bad light and thirty seconds.</h1>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Sole product designer at Hazedawn</dd></div>
+          <div><dt>When</dt><dd>2022–2023, five months</dd></div>
+          <div><dt>Platform</dt><dd>Mobile app, light and dark</dd></div>
+          <div><dt>Worked with</dt><dd>Product, engineering, field operations, QA</dd></div>
+        </dl>
+      </header>
+
+      <section class="story">
+        <div>
+          <h2>Starting point</h2>
+          <p>Site teams reported problems through WhatsApp threads, uncaptioned photos and handwritten notes. Issues arrived without the detail anyone needed to act on them, and nobody could see what was open, in progress or fixed. The brief was to make reporting digital.</p>
+        </div>
+        <div>
+          <h2>Outcome</h2>
+          <p>A three-step reporting flow built to survive glare, gloves and constant interruption, and one shared record for site engineers, supervisors and operations managers. After rollout, reporting took 40% less time and 30% more follow-ups were completed.</p>
+        </div>
+      </section>
+
+      <aside class="note">
+        <p>The screens here are rebuilt from the designs that shipped, refined for this case study. The flow, features and outcomes are the shipped ones.</p>
+      </aside>
+
+      <p class="reframe">Two weeks on site changed the brief. Workers already had phones, so going digital wasn't the problem. Every way of reporting cost them a free hand, good light or a spare minute, and they rarely had all three.</p>
+
+      <figure class="fig">
+        <div class="phones three">
+          <figure>
+            <img src="img/hazedawn-step1.webp" width="786" height="1704" loading="lazy" alt="Step 1: choosing an issue category from large icons, with Continue disabled until one is selected.">
+            <figcaption><span class="step">1</span>Pick a category. Continue unlocks only once you've chosen.</figcaption>
+          </figure>
+          <figure>
+            <img src="img/hazedawn-step2.webp" width="786" height="1704" loading="lazy" alt="Step 2: a photo of the problem with a circle drawn around the exact spot.">
+            <figcaption><span class="step">2</span>Take a photo and circle exactly what's wrong.</figcaption>
+          </figure>
+          <figure>
+            <img src="img/hazedawn-step3.webp" width="786" height="1704" loading="lazy" alt="Step 3: title, location, one-tap priority and a button to record a voice note.">
+            <figcaption><span class="step">3</span>Add details, set priority with one tap, or speak instead of typing.</figcaption>
+          </figure>
+        </div>
+        <figcaption>The whole report takes under a minute, and each screen asks for one decision.</figcaption>
+      </figure>
+
+      <section class="chapter" aria-labelledby="conditions">
+        <h2 id="conditions">Three site conditions, three design answers</h2>
+        <div class="prose">
+          <p>Every screen had to pass one test: does it still work with one hand free, bad light and thirty seconds? I took low-fidelity prototypes onto site and tested them in real conditions before anything was built.</p>
+        </div>
+        <div class="conditions">
+          <div class="cell">
+            <h3>Constant interruption</h3>
+            <p class="cost">Workers abandoned long forms the moment someone called them away, and rarely came back.</p>
+            <p class="answer">A guided flow with one decision per screen, so a report survives being put down halfway.</p>
+          </div>
+          <div class="cell">
+            <h3>Gloves and full hands</h3>
+            <p class="cost">Typing in dust, with gloves on or holding tools, was slow and full of mistakes.</p>
+            <p class="answer">Circle the problem on the photo, and record a voice note instead of typing.</p>
+          </div>
+          <div class="cell">
+            <h3>Glare and low light</h3>
+            <p class="cost">Light swings from midday sun to early-morning shade within one shift.</p>
+            <p class="answer">Light and dark modes, both tested outdoors and checked against WCAG AA contrast.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" aria-labelledby="record">
+        <h2 id="record">One record instead of three</h2>
+        <div class="prose">
+          <p>Before, an issue could live in a chat, a camera roll and a notepad at once. Now every report lands in one list everyone shares, sorted into open, in progress and resolved.</p>
+        </div>
+      </section>
+      <figure class="fig" style="padding-top:clamp(32px,5vw,48px)">
+        <div class="phones">
+          <img src="img/hazedawn-light.webp" width="786" height="1704" loading="lazy" alt="Ticket dashboard in light mode with counts of open, in progress and resolved issues.">
+          <img src="img/hazedawn-dark.webp" width="786" height="1704" loading="lazy" alt="The same ticket dashboard in dark mode.">
+        </div>
+        <figcaption>The dashboard in light and dark mode. Both were tested on site in direct sun, shade and early-morning low light.</figcaption>
+      </figure>
+
+      <section class="chapter" aria-labelledby="impact">
+        <h2 id="impact">What changed after rollout</h2>
+        <dl class="stats">
+          <div><dt>40%</dt><dd>less time to report an issue</dd></div>
+          <div><dt>30%</dt><dd>more follow-ups completed</dd></div>
+          <div><dt>1</dt><dd>shared record, replacing WhatsApp, email and paper</dd></div>
+          <div><dt>3</dt><dd>roles in one app: site engineers, supervisors, operations managers</dd></div>
+        </dl>
+        <div class="prose" style="margin-top:2rem">
+          <p>The clearest sign it worked: teams moved their issue threads out of WhatsApp on their own. Nobody told them to. The app was simply faster than the group chat.</p>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More">
+        <a href="proofroom.html">Previous: Proofroom</a>
+        <a href="/">All work</a>
+      </nav>
+    </main>
+
+    <footer class="site-foot">
+      <ul>
+        <li><a href="mailto:singhkritika832@gmail.com">singhkritika832@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/kritikasinghdesigner">LinkedIn</a></li>
+        <li><a href="https://github.com/kritikacsingh-ai">GitHub</a></li>
+      </ul>
+      <p>Designed and built by me, with Claude and Cursor.</p>
+    </footer>
+  </div>
+</body>
+</html>

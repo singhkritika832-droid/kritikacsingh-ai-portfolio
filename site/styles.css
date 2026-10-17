@@ -76,6 +76,12 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.02em; }
 .feature .shot { border-radius: 10px; overflow: hidden; background: var(--plate); }
 .feature .shot img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 .feature:hover .shot img { transform: scale(1.012); }
+.feature-next { margin-top: clamp(64px, 9vw, 112px); }
+@media (max-width: 760px) {
+  .feature .shot.phones.three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 20px 14px; }
+  .feature .shot.phones img { border-radius: 12px; }
+}
+.feature .shot.phones img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 .feature-meta {
   display: grid; grid-template-columns: 1fr auto; gap: .25rem 2rem; align-items: baseline;
   padding-block: 20px 0;
@@ -165,10 +171,42 @@ figcaption { color: var(--muted); font-size: var(--step--1); margin-top: 12px; m
   }
 }
 
+/* Hazedawn: site conditions and the design answer to each */
+.conditions {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
+  margin-top: clamp(32px, 5vw, 48px);
+}
+.conditions .cell { min-height: 0; }
+.conditions .cost { color: var(--muted); font-size: var(--step--1); line-height: 1.5; margin: 0; }
+.conditions .answer {
+  margin-top: auto; padding-top: 14px; border-top: 1px solid var(--rule);
+  font-size: var(--step--1); line-height: 1.5; color: var(--ink);
+}
+@media (max-width: 760px) { .conditions { grid-template-columns: 1fr; } }
+
+.reframe {
+  margin-top: clamp(40px, 6vw, 64px); max-width: 46rem;
+  font-size: var(--step-1); line-height: 1.45; letter-spacing: -0.01em;
+}
+.reframe s { color: var(--muted); text-decoration-thickness: 1px; }
+
+.stats {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem 2rem;
+  margin: clamp(32px, 5vw, 48px) 0 0; padding-top: 24px; border-top: 1px solid var(--rule);
+}
+.stats div { min-width: 0; }
+.stats dt { font-size: var(--step-2); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.stats dd { margin: .4rem 0 0; color: var(--muted); font-size: var(--step--1); line-height: 1.45; }
+@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.phones.three { grid-template-columns: repeat(3, minmax(0, 17rem)); }
+.phones figure figcaption { text-align: left; }
+@media (max-width: 760px) { .phones.three { grid-template-columns: minmax(0, 18rem); } }
+
 .strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .strip figure .plate { background: #171614; }
 .strip figcaption { margin-top: 10px; }
-.strip .step { color: var(--ink); font-weight: 600; margin-right: .35em; }
+.step { color: var(--ink); font-weight: 600; margin-right: .35em; }
 @media (max-width: 760px) { .strip { grid-template-columns: 1fr; max-width: 26rem; } }
 
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 4vw, 48px); }
