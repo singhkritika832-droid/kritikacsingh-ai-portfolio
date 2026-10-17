@@ -268,3 +268,6 @@ figcaption { color: var(--muted); font-size: var(--step--1); margin-top: 12px; m
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* Small archival screenshots: show near their real size so they stay sharp */
+.fig.before .plate { max-width: 680px; background: #fff; }
