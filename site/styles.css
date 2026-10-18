@@ -331,49 +331,30 @@ html, body { overflow-x: clip; }
 .index a:hover { background: var(--ink); color: var(--paper); }
 .index i { width: 14px; height: 14px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
 
-/* ---------- Hero: the headline is an AI suggestion you can accept, edit or question ---------- */
-:root { --assist: #1F7A69; --assist-soft: #E3F1ED; }
+/* ---------- Hero: people and AI shaking hands ---------- */
 .intro h1.hero-line { max-width: 17ch; font-size: clamp(2.75rem, 8.4vw, 7rem); line-height: 1.04; letter-spacing: -0.045em; }
-.suggest {
-  padding: 0 .1em; border-radius: .14em;
-  border: 3px dashed var(--assist);
-  background: var(--assist-soft); color: var(--assist);
+.together {
+  background-image: linear-gradient(#1F7A69, #1F7A69); background-repeat: no-repeat;
+  background-size: 100% .09em; background-position: 0 92%;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
-  transition: background .35s ease, color .35s ease, border-color .35s ease;
 }
-.suggest[data-state="accepted"], .suggest[data-state="edited"] {
-  border-color: transparent; background: transparent; color: var(--ink);
-  text-decoration: underline; text-decoration-color: var(--assist); text-decoration-thickness: .08em; text-underline-offset: .1em;
-}
-.suggest-text[contenteditable="true"] { outline: none; caret-color: var(--assist); }
-.suggest[data-state="editing"] { border-style: solid; background: #fff; color: var(--ink); }
-.suggest-tag {
-  display: inline-flex; align-items: center; gap: .4rem; font-size: var(--step--1); white-space: nowrap;
-  padding: 10px 14px; border-radius: 999px; background: var(--assist-soft); color: var(--assist);
-  border: 1.5px dashed var(--assist); margin-right: 4px;
-}
-.suggest-actions[data-done] .suggest-tag { border-style: solid; border-color: var(--ink); background: transparent; color: var(--ink); }
-.suggest-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: clamp(20px, 3vw, 32px); }
-.suggest-actions button {
-  font: inherit; font-size: var(--step--1); padding: 10px 18px; border-radius: 999px; cursor: pointer;
-  border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
-}
-.suggest-actions .sa-accept { background: var(--assist); border-color: var(--assist); color: #fff; }
-.suggest-actions .sa-why { border-color: transparent; text-decoration: underline; text-underline-offset: .2em; padding-inline: 10px; }
-.suggest-actions button:hover { filter: brightness(.92); }
-.suggest-actions[data-done] .sa-accept { background: transparent; color: var(--ink); border-color: var(--ink); }
-.sa-reason { margin-top: 14px; max-width: 46ch; color: var(--ink); font-size: var(--step-0); }
-.sa-status { margin: 10px 0 0; min-height: 1.5em; color: var(--assist); font-size: var(--step--1); }
-.intro .sa-status + p { margin-top: clamp(24px, 4vw, 40px); }
+.handshake-wrap { width: min(560px, 92%); margin: clamp(16px, 3vw, 28px) auto 0; }
+.handshake { display: block; width: 100%; height: auto; overflow: visible; }
+.intro .handshake-wrap + p { margin-top: clamp(24px, 4vw, 40px); }
 
-/* one orchestrated entrance: the suggestion box draws in after the headline */
 @media (prefers-reduced-motion: no-preference) {
-  .suggest { animation: suggest-in .9s .35s cubic-bezier(.2,.7,.2,1) both; }
-  .suggest-actions { animation: tag-in .5s 1.1s ease both; }
-  @keyframes suggest-in { from { border-color: transparent; background: transparent; color: var(--ink); } }
-  @keyframes tag-in { from { opacity: 0; transform: translateY(6px); } }
+  .handshake .arm-human { animation: from-left .9s .3s cubic-bezier(.2,.7,.2,1) both; }
+  .handshake .arm-ai    { animation: from-right .9s .3s cubic-bezier(.2,.7,.2,1) both; }
+  .handshake .shake     { animation: shake .9s 1.2s ease-in-out both; transform-origin: 350px 140px; }
+  .handshake .sparks line { animation: spark .5s 2s ease-out both; transform-box: fill-box; transform-origin: 50% 100%; }
+  .together { animation: underline .7s 1.6s cubic-bezier(.2,.7,.2,1) both; }
+  .handshake-wrap:hover .shake { animation: shake .9s ease-in-out; }
+  @keyframes from-left  { from { transform: translateX(-140px); opacity: 0; } }
+  @keyframes from-right { from { transform: translateX(140px);  opacity: 0; } }
+  @keyframes shake { 0%,100% { transform: translateY(0); } 25% { transform: translateY(-10px); } 50% { transform: translateY(8px); } 75% { transform: translateY(-5px); } }
+  @keyframes spark { from { opacity: 0; transform: scaleY(0); } }
+  @keyframes underline { from { background-size: 0% .09em; } }
 }
-@media (max-width: 640px) { .suggest { border-width: 2px; } }
 
 /* Centered hero with portrait */
 .intro-centered { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: clamp(48px, 8vw, 96px); }
@@ -382,10 +363,6 @@ html, body { overflow-x: clip; }
   margin-bottom: clamp(24px, 4vw, 40px); box-shadow: 0 0 0 6px var(--paper), 0 0 0 7px var(--rule);
 }
 .intro-centered h1.hero-line { max-width: 15ch; margin-inline: auto; }
-.intro-centered .suggest-actions { justify-content: center; }
 .intro-centered p { margin-inline: auto; }
-.intro-centered .sa-reason { margin-inline: auto; }
 .intro-centered .index { justify-content: center; }
 .intro-centered h1.hero-line { line-height: 1.14; }
-.intro-centered .sa-status:empty { min-height: 0; margin: 0; }
-.intro-centered .sa-status + p { margin-top: clamp(28px, 4vw, 44px); }

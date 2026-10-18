@@ -27,15 +27,55 @@
     <main>
       <section class="intro intro-centered">
         <img class="portrait" src="img/kritika.webp" width="640" height="640" alt="Kritika Singh, smiling in sunglasses in the front seat of a car on a sunny day.">
-        <h1 class="hero-line">I design products where people and AI <span class="suggest" id="suggest" data-state="unsure"><span class="suggest-text" id="suggest-text">make decisions together</span></span>.</h1>
-        <div class="suggest-actions" role="group" aria-label="This headline was suggested by an AI. Accept, edit or ask why.">
-          <span class="suggest-tag" id="suggest-tag">Assist · 62% sure</span>
-          <button type="button" class="sa-accept" id="sa-accept">Accept</button>
-          <button type="button" class="sa-edit" id="sa-edit">Edit</button>
-          <button type="button" class="sa-why" id="sa-why" aria-expanded="false" aria-controls="sa-reason">Why?</button>
+        <h1 class="hero-line">I design products where people and AI <span class="together">make decisions together</span>.</h1>
+        <div class="handshake-wrap">
+          <svg class="handshake" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A human hand and an AI hand shaking hands">
+            <g class="shake" stroke="#17181A" stroke-width="2.5" stroke-linejoin="round">
+              <!-- AI arm, from the right -->
+              <g class="arm-ai">
+                <g transform="rotate(-9 420 140)">
+                  <rect x="430" y="108" width="270" height="60" rx="12" fill="#1F7A69"/>
+                  <g stroke="#9FD8CC" stroke-width="2" opacity=".7"><line x1="500" y1="110" x2="500" y2="166"/><line x1="575" y1="110" x2="575" y2="166"/></g>
+                  <g fill="#E3F1ED" stroke="none"><circle cx="537" cy="138" r="5"/><circle cx="612" cy="138" r="5"/></g>
+                  <rect x="414" y="102" width="24" height="72" rx="7" fill="#165A4D"/>
+                </g>
+                <!-- AI fingertips curling under the human palm -->
+                <g fill="#2E9A85">
+                  <rect x="262" y="160" width="26" height="20" rx="10"/>
+                  <rect x="286" y="162" width="26" height="20" rx="10"/>
+                  <rect x="310" y="161" width="26" height="20" rx="10"/>
+                </g>
+                <!-- AI palm -->
+                <path d="M420 112 L336 116 Q312 118 312 136 L314 160 Q318 176 340 174 L424 168 Z" fill="#2E9A85"/>
+                <!-- AI thumb over the top of the human hand -->
+                <path d="M394 116 Q362 88 316 92 Q298 94 300 106 Q304 116 322 113 Q352 110 374 122 Z" fill="#2E9A85"/>
+                <circle cx="315" cy="103" r="3.5" fill="#E3F1ED" stroke="none"/>
+              </g>
+              <!-- Human arm, from the left (blue jumper sleeve) -->
+              <g class="arm-human">
+                <g transform="rotate(9 230 140)">
+                  <rect x="-30" y="110" width="250" height="60" rx="12" fill="#2F5BD8"/>
+                  <rect x="204" y="104" width="24" height="72" rx="7" fill="#F1EFEA"/>
+                </g>
+                <!-- human palm -->
+                <path d="M228 118 L304 116 Q334 116 338 134 L338 150 Q334 166 306 166 L232 170 Z" fill="#C98B63"/>
+                <!-- human fingers wrapping over the back of the AI hand -->
+                <g fill="#C98B63">
+                  <rect x="330" y="118" width="21" height="52" rx="10.5"/>
+                  <rect x="349" y="115" width="21" height="55" rx="10.5"/>
+                  <rect x="368" y="117" width="21" height="52" rx="10.5"/>
+                  <rect x="387" y="123" width="19" height="44" rx="9.5"/>
+                </g>
+              </g>
+            </g>
+            <!-- sparks at the clasp -->
+            <g class="sparks" stroke="#1F7A69" stroke-width="4" stroke-linecap="round">
+              <line x1="352" y1="70" x2="352" y2="46"/>
+              <line x1="314" y1="78" x2="298" y2="60"/>
+              <line x1="390" y1="78" x2="406" y2="60"/>
+            </g>
+          </svg>
         </div>
-        <p class="sa-reason" id="sa-reason" hidden>Because that's the moment I design for. Every AI feature I build shows how sure it is and asks before it acts, just like this headline.</p>
-        <p class="sa-status" id="sa-status" aria-live="polite"></p>
         <p>Product designer with six years across AI tools, fintech and B2B. Based in Dublin, open to relocating.</p>
         <ul class="index" aria-label="Case studies">
           <li><a href="proofroom.html"><i style="background:#141312"></i>Proofroom</a></li>
@@ -114,36 +154,5 @@
     </footer>
   </div>
 
-  <script>
-  (function () {
-    var box = document.getElementById('suggest'), tag = document.getElementById('suggest-tag'),
-        text = document.getElementById('suggest-text'), status = document.getElementById('sa-status'),
-        acts = document.querySelector('.suggest-actions'), why = document.getElementById('sa-why'),
-        reason = document.getElementById('sa-reason'), edit = document.getElementById('sa-edit');
-    function settle(state, label, msg) {
-      box.dataset.state = state; tag.textContent = label; status.textContent = msg; acts.setAttribute('data-done', '');
-    }
-    document.getElementById('sa-accept').addEventListener('click', function () {
-      settle('accepted', 'Confirmed by you', 'Accepted. Assist will remember this.');
-    });
-    edit.addEventListener('click', function () {
-      box.dataset.state = 'editing'; tag.textContent = 'Editing';
-      text.setAttribute('contenteditable', 'true'); text.focus();
-      var r = document.createRange(); r.selectNodeContents(text);
-      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
-    });
-    function finishEdit() {
-      if (box.dataset.state !== 'editing') return;
-      text.removeAttribute('contenteditable');
-      if (!text.textContent.trim()) text.textContent = 'make decisions together';
-      settle('edited', 'Edited by you', 'Edited. You stay in charge of the words.');
-    }
-    text.addEventListener('blur', finishEdit);
-    text.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); text.blur(); } });
-    why.addEventListener('click', function () {
-      var open = reason.hidden; reason.hidden = !open; why.setAttribute('aria-expanded', String(open));
-    });
-  })();
-  </script>
 </body>
 </html>
