@@ -371,7 +371,7 @@ html, body { overflow-x: clip; }
 
 /* Wordmark: Kritika, with the final "a" turned into AI */
 .site-head .name { letter-spacing: -0.01em; }
-.site-head .name .name-ai {
+.name-ai {
   display: inline-block; margin-left: 1px; padding: 0 .28em; border-radius: .3em;
   background: var(--baby); color: #1E3F5E; font-size: .82em; line-height: 1.35; vertical-align: .08em;
 }
@@ -379,3 +379,7 @@ html, body { overflow-x: clip; }
 .index a:hover { background: var(--baby); border-color: var(--baby); color: #1E3F5E; }
 .intro h1.hero-line { text-wrap: balance; max-width: 26ch; }
 .now-then { max-width: 42rem; }
+
+.built-head { font-size: var(--step-2); }
+.built-sub { color: var(--muted); margin: .4rem 0 20px; }
+.intro h1.hero-line + .index { margin-top: clamp(28px, 4vw, 40px); }
