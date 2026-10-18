@@ -419,3 +419,41 @@ h1, h2, h3, .site-head .name { font-family: var(--serif); font-weight: 500; lett
 .intro-side h1.hero-line { max-width: 20ch; }
 /* hero text fills the width beside the photo */
 .intro-side h1.hero-line { max-width: none; font-size: clamp(2.2rem, 5.6vw, 4.9rem); line-height: 1.08; text-wrap: balance; }
+
+/* ---------- Softer project containers: rounded, inset, gentle gradients ---------- */
+.slab {
+  width: auto; margin: clamp(16px, 2.5vw, 28px) 0 0; border-radius: clamp(20px, 2.4vw, 32px);
+  padding: clamp(36px, 6vw, 88px) clamp(20px, 5vw, 80px) clamp(40px, 6vw, 80px);
+}
+.slab:first-of-type { margin-top: 0; }
+.slab .feature-meta .kind { background: rgba(255,255,255,.55); border-color: rgba(63,63,63,.22); color: var(--ink-strong); }
+
+.slab-proofroom {
+  --slab-ink: #2F3A38; --slab-muted: #5C6B68; --slab-line: #2F3A38;
+  background:
+    radial-gradient(120% 90% at 0% 0%, #D6EEE7 0%, rgba(214,238,231,0) 60%),
+    radial-gradient(90% 80% at 100% 100%, #DCE6F3 0%, rgba(220,230,243,0) 60%),
+    #EEF3F1;
+}
+.slab-proofroom .shot img { box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 24px 60px rgba(40,70,64,.18); }
+
+.slab-hazedawn {
+  --slab-ink: #4A3426; --slab-muted: #7A5E4C; --slab-line: #4A3426;
+  background:
+    radial-gradient(110% 90% at 100% 0%, #FFD9BF 0%, rgba(255,217,191,0) 60%),
+    radial-gradient(90% 80% at 0% 100%, #FFE9D6 0%, rgba(255,233,214,0) 60%),
+    #FFF4EC;
+}
+.slab-hazedawn .shot.phones img { border-radius: 28px; box-shadow: 0 0 0 1px rgba(74,52,38,.12), 0 20px 50px rgba(120,60,20,.14); }
+
+.slab-icici {
+  --slab-ink: #3F3A4A; --slab-muted: #6C6578; --slab-line: #3F3A4A;
+  background:
+    radial-gradient(110% 90% at 0% 0%, #FBE6D4 0%, rgba(251,230,212,0) 60%),
+    radial-gradient(90% 80% at 100% 100%, #DCEBFA 0%, rgba(220,235,250,0) 60%),
+    #F7F3F1;
+}
+@media (max-width: 760px) {
+  .slab-hazedawn .shot.phones img { border-radius: 14px; box-shadow: 0 0 0 1px rgba(74,52,38,.14); }
+}
+.slab + .slab { margin-top: clamp(16px, 2.5vw, 28px); }
