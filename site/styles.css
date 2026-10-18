@@ -514,3 +514,12 @@ figure.sticky:hover { transform: rotate(0) translateY(-3px); box-shadow: 0 14px 
 .note-status:empty { display: none; }
 @media (prefers-reduced-motion: reduce) { .sticky { transition: none; } }
 .intro-side { padding-top: clamp(96px, 14vw, 200px); padding-bottom: clamp(64px, 8vw, 112px); }
+
+/* Current page in the menu: a baby blue pill */
+.site-head nav { align-items: center; }
+.site-head nav a { padding: 4px 12px; border-radius: 999px; }
+.site-head nav a[aria-current="page"] { background: var(--baby); color: #1E3F5E; text-decoration: none; }
+.site-head nav a[aria-current="page"]:hover { color: #1E3F5E; }
+.site-head nav { gap: clamp(4px, 1.2vw, 14px); }
+.site-head .name { margin-right: auto; }
+@media (max-width: 420px) { .site-head nav a { padding: 4px 8px; } }
