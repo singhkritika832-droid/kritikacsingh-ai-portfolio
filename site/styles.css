@@ -417,3 +417,5 @@ h1, h2, h3, .site-head .name { font-family: var(--serif); font-weight: 500; lett
 .intro-side { align-items: start; }
 .intro-side .portrait { margin: 7px 0 0 7px; width: clamp(104px, 11vw, 150px); }
 .intro-side h1.hero-line { max-width: 20ch; }
+/* hero text fills the width beside the photo */
+.intro-side h1.hero-line { max-width: none; font-size: clamp(2.2rem, 5.6vw, 4.9rem); line-height: 1.08; text-wrap: balance; }
