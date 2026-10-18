@@ -338,20 +338,20 @@ html, body { overflow-x: clip; }
   background-size: 100% .09em; background-position: 0 92%;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
-.handshake-wrap { width: min(560px, 92%); margin: clamp(16px, 3vw, 28px) auto 0; }
+.handshake-wrap { width: clamp(150px, 20vw, 230px); margin: clamp(20px, 3vw, 32px) auto 0; }
 .handshake { display: block; width: 100%; height: auto; overflow: visible; }
 .intro .handshake-wrap + p { margin-top: clamp(24px, 4vw, 40px); }
 
 @media (prefers-reduced-motion: no-preference) {
-  .handshake .arm-human { animation: from-left .9s .3s cubic-bezier(.2,.7,.2,1) both; }
-  .handshake .arm-ai    { animation: from-right .9s .3s cubic-bezier(.2,.7,.2,1) both; }
-  .handshake .shake     { animation: shake .9s 1.2s ease-in-out both; transform-origin: 350px 140px; }
-  .handshake .sparks line { animation: spark .5s 2s ease-out both; transform-box: fill-box; transform-origin: 50% 100%; }
-  .together { animation: underline .7s 1.6s cubic-bezier(.2,.7,.2,1) both; }
+  .handshake .hand-human { animation: from-left .8s .3s cubic-bezier(.2,.7,.2,1) both; }
+  .handshake .hand-ai    { animation: from-right .8s .3s cubic-bezier(.2,.7,.2,1) both; }
+  .handshake .shake      { animation: shake .9s 1.1s ease-in-out both; transform-box: fill-box; transform-origin: 50% 50%; }
+  .handshake .sparks line { animation: spark .45s 1.9s ease-out both; transform-box: fill-box; transform-origin: 50% 100%; }
+  .together { animation: underline .7s 1.5s cubic-bezier(.2,.7,.2,1) both; }
   .handshake-wrap:hover .shake { animation: shake .9s ease-in-out; }
-  @keyframes from-left  { from { transform: translateX(-140px); opacity: 0; } }
-  @keyframes from-right { from { transform: translateX(140px);  opacity: 0; } }
-  @keyframes shake { 0%,100% { transform: translateY(0); } 25% { transform: translateY(-10px); } 50% { transform: translateY(8px); } 75% { transform: translateY(-5px); } }
+  @keyframes from-left  { from { transform: translateX(-60px); opacity: 0; } }
+  @keyframes from-right { from { transform: translateX(60px);  opacity: 0; } }
+  @keyframes shake { 0%,100% { transform: rotate(0) translateY(0); } 25% { transform: rotate(-4deg) translateY(-6px); } 50% { transform: rotate(3deg) translateY(5px); } 75% { transform: rotate(-2deg) translateY(-3px); } }
   @keyframes spark { from { opacity: 0; transform: scaleY(0); } }
   @keyframes underline { from { background-size: 0% .09em; } }
 }
