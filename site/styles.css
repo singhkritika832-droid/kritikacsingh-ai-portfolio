@@ -374,3 +374,18 @@ html, body { overflow-x: clip; }
   @keyframes tag-in { from { opacity: 0; transform: translateY(6px); } }
 }
 @media (max-width: 640px) { .suggest { border-width: 2px; } }
+
+/* Centered hero with portrait */
+.intro-centered { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: clamp(48px, 8vw, 96px); }
+.intro-centered .portrait {
+  width: clamp(120px, 16vw, 184px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover;
+  margin-bottom: clamp(24px, 4vw, 40px); box-shadow: 0 0 0 6px var(--paper), 0 0 0 7px var(--rule);
+}
+.intro-centered h1.hero-line { max-width: 15ch; margin-inline: auto; }
+.intro-centered .suggest-actions { justify-content: center; }
+.intro-centered p { margin-inline: auto; }
+.intro-centered .sa-reason { margin-inline: auto; }
+.intro-centered .index { justify-content: center; }
+.intro-centered h1.hero-line { line-height: 1.14; }
+.intro-centered .sa-status:empty { min-height: 0; margin: 0; }
+.intro-centered .sa-status + p { margin-top: clamp(28px, 4vw, 44px); }
