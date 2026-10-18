@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notes — Kritika Singh</title>
+  <meta name="description" content="Leave Kritika a sticky note: a hello, a thought on her work, or your favourite AI moment.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/CrimsonPro-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-head">
+      <a class="name" href="/">Kritika Singh</a>
+      <nav aria-label="Main">
+        <a href="/">Work</a>
+        <a href="notes.html" aria-current="page">Notes</a>
+        <a href="about.html">About</a>
+        <a href="kritika-singh-cv.pdf">CV</a>
+      </nav>
+    </header>
+
+    <main class="notes-page">
+      <header class="notes-head">
+        <h1>Leave me a note.</h1>
+        <p>A hello, a thought on my work, or your favourite moment with AI. I read every one, and put them up here once I have.</p>
+      </header>
+
+      <div class="wall" id="wall">
+        <!-- The composer is the first sticky on the wall -->
+        <form class="sticky composer" name="notes" method="POST" data-netlify="true" netlify-honeypot="website" id="note-form" data-colour="blue">
+          <input type="hidden" name="form-name" value="notes">
+          <p class="hp" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label></p>
+          <label class="sr" for="note-message">Your note</label>
+          <textarea id="note-message" name="message" maxlength="160" rows="5" required placeholder="Write something nice…"></textarea>
+          <div class="composer-row">
+            <label class="sr" for="note-name">Your name (optional)</label>
+            <input id="note-name" name="name" maxlength="40" placeholder="Your name (optional)">
+            <span class="count" id="note-count" aria-live="polite">160</span>
+          </div>
+          <fieldset class="colours">
+            <legend class="sr">Note colour</legend>
+            <label><input type="radio" name="colour" value="blue" checked><span class="sw sw-blue"></span><span class="sr">Baby blue</span></label>
+            <label><input type="radio" name="colour" value="peach"><span class="sw sw-peach"></span><span class="sr">Peach</span></label>
+            <label><input type="radio" name="colour" value="mint"><span class="sw sw-mint"></span><span class="sr">Mint</span></label>
+            <label><input type="radio" name="colour" value="cream"><span class="sw sw-cream"></span><span class="sr">Cream</span></label>
+          </fieldset>
+          <button type="submit">Pin note</button>
+          <p class="note-status" id="note-status" role="status"></p>
+        </form>
+        <!-- Approved notes are rendered here from notes.json -->
+      </div>
+    </main>
+
+    <footer class="site-foot">
+      <ul>
+        <li><a href="mailto:singhkritika832@gmail.com">singhkritika832@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/kritikasinghdesigner">LinkedIn</a></li>
+        <li><a href="https://github.com/kritikacsingh-ai">GitHub</a></li>
+      </ul>
+      <p>Designed and built by me, with Claude and Cursor.</p>
+    </footer>
+  </div>
+
+  <script>
+  (function () {
+    var wall = document.getElementById('wall'), form = document.getElementById('note-form'),
+        msg = document.getElementById('note-message'), count = document.getElementById('note-count'),
+        status = document.getElementById('note-status');
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+    function stick(n) {
+      var el = document.createElement('figure');
+      el.className = 'sticky'; el.dataset.colour = n.colour || 'cream';
+      el.innerHTML = '<blockquote>' + esc(n.message) + '</blockquote>' +
+        '<figcaption>' + esc(n.name || 'Someone nice') + (n.date ? ' · ' + esc(n.date) : '') + '</figcaption>';
+      wall.appendChild(el);
+    }
+    fetch('notes.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
+      .then(function (list) { list.forEach(stick); }).catch(function () {});
+
+    msg.addEventListener('input', function () { count.textContent = 160 - msg.value.length; });
+    form.addEventListener('change', function (e) {
+      if (e.target.name === 'colour') form.dataset.colour = e.target.value;
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('button'); btn.disabled = true; status.textContent = 'Pinning…';
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                   body: new URLSearchParams(new FormData(form)).toString() })
+        .then(function (r) {
+          if (!r.ok) throw new Error();
+          form.reset(); form.dataset.colour = 'blue'; count.textContent = '160';
+          status.textContent = 'Thank you! Your note will appear here once I’ve read it.';
+        })
+        .catch(function () { status.textContent = 'That didn’t send. Please try again, or email me instead.'; })
+        .finally(function () { btn.disabled = false; });
+    });
+  })();
+  </script>
+</body>
+</html>
