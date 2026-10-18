@@ -3,6 +3,11 @@
    The work carries the colour; the page stays quiet around it. */
 
 @font-face {
+  font-family: "Crimson Pro";
+  src: url("fonts/CrimsonPro-Variable.woff2") format("woff2");
+  font-weight: 200 900; font-style: normal; font-display: swap;
+}
+@font-face {
   font-family: "Geist";
   src: url("fonts/Geist-Variable.woff2") format("woff2");
   font-weight: 100 900;
@@ -11,12 +16,13 @@
 }
 
 :root {
-  --paper: #F4F4F2;
-  --ink: #3A3E44;        /* soft charcoal instead of black */
-  --ink-strong: #2B2F34; /* headings */
-  --muted: #6B7077;
-  --rule: #DADBD6;
-  --plate: #E9EAE6;
+  --paper: #F5F5F5;      /* Rachel's background */
+  --ink: #525252;        /* body text: mid grey */
+  --ink-strong: #3F3F3F; /* headings: soft charcoal, never black */
+  --muted: #737373;      /* secondary text, still AA on #F5F5F5 */
+  --rule: #E0E0E0;
+  --plate: #EBEBEB;
+  --serif: "Crimson Pro", "Iowan Old Style", Georgia, serif;
   --baby: #B9DCF6;       /* baby blue: fills, pills, highlights */
   --baby-soft: #E4F1FB;
   --accent: #2F6DA8;     /* deeper blue for link text, readable on paper */
@@ -383,3 +389,11 @@ html, body { overflow-x: clip; }
 .built-head { font-size: var(--step-2); }
 .built-sub { color: var(--muted); margin: .4rem 0 20px; }
 .intro h1.hero-line + .index { margin-top: clamp(28px, 4vw, 40px); }
+
+/* Typography: serif display (Crimson Pro), Geist for everything else */
+h1, h2, h3, .site-head .name { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; }
+.intro h1.hero-line { font-family: var(--serif); font-weight: 400; letter-spacing: -0.015em; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.12; }
+.cs-head h1, .about h1 { font-weight: 400; letter-spacing: -0.015em; }
+.slab .feature-meta h2 { font-weight: 400; letter-spacing: -0.015em; }
+.site-head .name { font-size: 1.2rem; }
+.rows .title, .cell h3, .story h2, .aside h2, .facts dt { font-family: "Geist", system-ui, sans-serif; }
