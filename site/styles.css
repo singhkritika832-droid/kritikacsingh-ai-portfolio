@@ -11,12 +11,15 @@
 }
 
 :root {
-  --paper: #EDEEEB;
-  --ink: #17181A;
-  --muted: #5B5E62;
-  --rule: #CFD1CC;
-  --plate: #E2E3DF;
-  --accent: #2740D9;
+  --paper: #F4F4F2;
+  --ink: #3A3E44;        /* soft charcoal instead of black */
+  --ink-strong: #2B2F34; /* headings */
+  --muted: #6B7077;
+  --rule: #DADBD6;
+  --plate: #E9EAE6;
+  --baby: #B9DCF6;       /* baby blue: fills, pills, highlights */
+  --baby-soft: #E4F1FB;
+  --accent: #2F6DA8;     /* deeper blue for link text, readable on paper */
 
   --measure: 38rem;
   --wide: 76rem;
@@ -47,7 +50,7 @@ a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset:
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 p { margin: 0 0 1em; }
-h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.02em; }
+h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.02em; color: var(--ink-strong); }
 
 .wrap { width: min(var(--wide), 100% - 2 * var(--gutter)); margin-inline: auto; }
 .prose { max-width: var(--measure); }
@@ -331,9 +334,15 @@ html, body { overflow-x: clip; }
 .index a:hover { background: var(--ink); color: var(--paper); }
 .index i { width: 14px; height: 14px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
 
-/* ---------- Hero headline ---------- */
-.intro h1.hero-line { max-width: 17ch; font-size: clamp(2.75rem, 8.4vw, 7rem); line-height: 1.04; letter-spacing: -0.045em; }
-.intro-centered h1.hero-line + p { margin-top: clamp(24px, 4vw, 40px); }
+/* ---------- Hero: a calm sentence plus currently / previously ---------- */
+.intro h1.hero-line {
+  max-width: 24ch; font-size: clamp(1.9rem, 4.2vw, 3.1rem); line-height: 1.18; letter-spacing: -0.025em;
+  font-weight: 500; color: var(--ink-strong);
+}
+.intro h1.hero-line .hl { background: linear-gradient(transparent 58%, var(--baby) 58%, var(--baby) 92%, transparent 92%); padding: 0 .06em; }
+.now-then { display: grid; grid-template-columns: auto 1fr; gap: .35rem 1.25rem; margin: clamp(24px, 4vw, 36px) auto 0; text-align: left; font-size: var(--step-0); max-width: 34rem; }
+.now-then dt { color: var(--muted); }
+.now-then dd { margin: 0; color: var(--ink); }
 
 /* Centered hero with portrait */
 .intro-centered { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: clamp(48px, 8vw, 96px); }
@@ -341,10 +350,10 @@ html, body { overflow-x: clip; }
   width: clamp(120px, 16vw, 184px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover;
   margin-bottom: clamp(24px, 4vw, 40px); box-shadow: 0 0 0 6px var(--paper), 0 0 0 7px var(--rule);
 }
-.intro-centered h1.hero-line { max-width: 15ch; margin-inline: auto; }
+.intro-centered h1.hero-line { margin-inline: auto; }
 .intro-centered p { margin-inline: auto; }
 .intro-centered .index { justify-content: center; }
-.intro-centered h1.hero-line { line-height: 1.14; }
+
 
 /* Cursor: a small circle of my photo (mouse and trackpad only) */
 @media (hover: hover) and (pointer: fine) {
@@ -364,5 +373,9 @@ html, body { overflow-x: clip; }
 .site-head .name { letter-spacing: -0.01em; }
 .site-head .name .name-ai {
   display: inline-block; margin-left: 1px; padding: 0 .28em; border-radius: .3em;
-  background: #1F7A69; color: #fff; font-size: .82em; line-height: 1.35; vertical-align: .08em;
+  background: var(--baby); color: #1E3F5E; font-size: .82em; line-height: 1.35; vertical-align: .08em;
 }
+.slab .feature-meta h2 { color: var(--slab-ink); }
+.index a:hover { background: var(--baby); border-color: var(--baby); color: #1E3F5E; }
+.intro h1.hero-line { text-wrap: balance; max-width: 26ch; }
+.now-then { max-width: 42rem; }
