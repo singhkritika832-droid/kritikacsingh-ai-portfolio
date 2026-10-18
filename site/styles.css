@@ -513,3 +513,4 @@ figure.sticky:hover { transform: rotate(0) translateY(-3px); box-shadow: 0 14px 
 .note-status { margin: 0; font-size: var(--step--1); color: var(--ink); }
 .note-status:empty { display: none; }
 @media (prefers-reduced-motion: reduce) { .sticky { transition: none; } }
+.intro-side { padding-top: clamp(96px, 14vw, 200px); padding-bottom: clamp(64px, 8vw, 112px); }
