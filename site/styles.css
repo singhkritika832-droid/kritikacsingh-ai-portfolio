@@ -413,4 +413,7 @@ h1, h2, h3, .site-head .name { font-family: var(--serif); font-weight: 500; lett
   .intro-side { grid-template-columns: 1fr; gap: 20px; }
   .intro-side .portrait { width: 96px; }
 }
-.intro-side .portrait { margin-left: 7px; }
+/* align: photo top = headline top, photo left edge (ring included) = page margin */
+.intro-side { align-items: start; }
+.intro-side .portrait { margin: 7px 0 0 7px; width: clamp(104px, 11vw, 150px); }
+.intro-side h1.hero-line { max-width: 20ch; }
