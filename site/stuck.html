@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When the AI is stuck, a concept for AI app builders — Kritika Singh</title>
+  <meta name="description" content="A self-initiated concept for Lovable: what an AI app builder should do before a fix, after two failed fixes, and around the parts of your app that already work.">
+  <meta property="og:title" content="When the AI is stuck — Kritika Singh">
+  <meta property="og:image" content="https://kritikacsingh.com/img/stuck-card.webp">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/CrimsonPro-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .proto { margin: 0; }
+    .proto iframe { display: block; width: 100%; height: 860px; border: 0; border-radius: 16px; background: var(--paper); }
+    .proto .open { display: inline-block; margin-top: 10px; font-size: var(--step--1); }
+    @media (max-width: 760px) { .proto iframe { height: 1650px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-head">
+      <a class="name" href="/">Kritika Singh</a>
+      <nav aria-label="Main">
+        <a href="/">Work</a>
+        <a href="notes.html">Notes</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="cs-head">
+        <p class="project">Concept for Lovable</p>
+        <h1>What should an AI app builder do when it's stuck?</h1>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Self-initiated concept</dd></div>
+          <div><dt>When</dt><dd>October 2026, one weekend</dd></div>
+          <div><dt>Platform</dt><dd>Web</dd></div>
+          <div><dt>Made with</dt><dd>Claude Code, prototyped in HTML and JavaScript</dd></div>
+        </dl>
+      </header>
+
+      <aside class="note">
+        <p>An unsolicited concept. I'm not affiliated with Lovable, and the project, files and errors in the prototype are invented for the demo.</p>
+      </aside>
+
+      <section class="story">
+        <div>
+          <h2>Starting point</h2>
+          <p>I built a small notes wall in Lovable. The first page came together in minutes. Then I asked for one real feature, sign up and login, and it used up all my free credits. Public reviews tell the same story at scale: in a summary of 1,800+ reviews, about half of the pain points are about credits, often spent on fixes that create new problems.</p>
+        </div>
+        <div>
+          <h2>Outcome</h2>
+          <p>Three moments that change when the AI acts and when it asks: a plan before any fix, an honest stop after two failed fixes, and locks for the parts of your app that already work. A working prototype you can click through below.</p>
+        </div>
+      </section>
+
+      <p class="reframe">Failing isn't the problem. Every AI gets things wrong. The problem is failing confidently, again and again, with someone's credits. When a fix costs money, the AI should earn the right to try it.</p>
+
+      <section class="chapter" aria-labelledby="rule">
+        <h2 id="rule">One rule behind all three moments</h2>
+        <div class="prose">
+          <p>I used the same two questions I designed around on <a href="proofroom.html">Proofroom</a>: how sure is the AI, and what will acting cost you? Sure, cheap and easy to undo, it can act and show what it changed. Unsure, it says so before spending anything. Wrong twice, it stops guessing.</p>
+        </div>
+      </section>
+
+      <figure class="fig proto" style="padding-top:clamp(32px,5vw,48px)">
+        <iframe src="stuck-prototype.html" title="Clickable prototype: When the AI is stuck" loading="lazy"></iframe>
+        <figcaption>Try it: switch between the three moments at the top, and click the buttons inside the chat. <a class="open" href="stuck-prototype.html" target="_blank" rel="noopener">Open the prototype full screen</a></figcaption>
+      </figure>
+
+      <section class="chapter" aria-labelledby="moments">
+        <h2 id="moments">Three moments</h2>
+        <div class="conditions">
+          <div class="cell">
+            <h3>1. Before a fix</h3>
+            <p class="cost">Today you press fix and find out afterwards what it touched, and whether it worked.</p>
+            <p class="answer">The AI shows what it thinks broke, how sure it is, which parts it will and won't touch, and what it costs. Then you choose: fix, ask why, or say "that's not it" for free.</p>
+          </div>
+          <div class="cell">
+            <h3>2. After two failed fixes</h3>
+            <p class="cost">A third guess usually costs another credit and makes things worse.</p>
+            <p class="answer">It stops and says so. It lists what it knows and what it doesn't, then offers a free way back to the last working version, a deeper look before changing anything, or a chance to explain what you expected.</p>
+          </div>
+          <div class="cell">
+            <h3>3. Lock what works</h3>
+            <p class="cost">Reviewers describe the AI overwriting parts that were fine.</p>
+            <p class="answer">Lock any part of the preview. Every plan lists what it won't touch, and to change a locked part, it asks you first.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" aria-labelledby="next">
+        <h2 id="next">What I'd test next</h2>
+        <div class="prose">
+          <p>This hasn't been tested with users yet. To start, I'd measure three things: how many fix attempts it takes to solve an error, how often people go back to a working version instead of trying again, and whether people who see a plan first spend fewer credits per error. I'd also want to learn when the plan card helps, and when it just gets in the way of someone who's moving fast.</p>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More">
+        <a href="/">All work</a>
+        <a href="proofroom.html">Next: Proofroom</a>
+      </nav>
+    </main>
+
+    <footer class="site-foot">
+      <ul>
+        <li><a href="mailto:singhkritika832@gmail.com">singhkritika832@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/kritikasinghdesigner">LinkedIn</a></li>
+        <li><a href="https://github.com/kritikacsingh-ai">GitHub</a></li>
+      </ul>
+      <p>Designed and built by me, with Claude and Cursor.</p>
+    </footer>
+  </div>
+</body>
+</html>

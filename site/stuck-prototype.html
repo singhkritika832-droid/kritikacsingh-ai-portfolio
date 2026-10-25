@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When the AI is stuck — prototype — Kritika Singh</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face { font-family: "Geist"; src: url("fonts/Geist-Variable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+:root {
+  --paper:#F5F5F5; --ink:#525252; --strong:#2E2E2E; --muted:#737373; --rule:#E3E3E3;
+  --panel:#FFFFFF; --soft:#FAFAFA; --baby:#B9DCF6; --baby-soft:#EAF4FC; --accent:#2F6DA8;
+  --ok:#2F7D5B; --ok-soft:#E6F4EC; --warn:#A2561E; --warn-soft:#FDF0E6; --bad:#B2423A; --bad-soft:#FBECEA;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); font: 14px/1.5 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+button { font: inherit; cursor: pointer; }
+.top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding: 14px 16px 10px; }
+.moments { display: flex; flex-wrap: wrap; gap: 6px; }
+.moments button { border: 1px solid var(--rule); background: #fff; color: var(--ink); padding: 7px 14px; border-radius: 999px; }
+.moments button[aria-pressed="true"] { background: var(--baby); border-color: var(--baby); color: #1E3F5E; }
+.reset { background: none; border: 0; color: var(--accent); text-decoration: underline; padding: 6px; }
+
+.app { margin: 0 16px 16px; border: 1px solid var(--rule); border-radius: 14px; background: var(--panel); overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 12px 32px -16px rgba(0,0,0,.12); }
+.bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--rule); background: var(--soft); font-size: 13px; }
+.bar .proj { font-weight: 600; color: var(--strong); }
+.bar .ver { color: var(--muted); }
+.bar .credits { margin-left: auto; padding: 3px 10px; border-radius: 999px; background: #fff; border: 1px solid var(--rule); }
+.bar .credits.flash { animation: flash 1.2s ease-out; }
+@keyframes flash { from { background: var(--warn-soft); border-color: #F0C9A8; } to { background: #fff; } }
+.split { display: grid; grid-template-columns: minmax(300px, 400px) 1fr; min-height: 600px; }
+
+/* chat */
+.chat { border-right: 1px solid var(--rule); display: flex; flex-direction: column; min-height: 0; }
+.log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; max-height: 640px; }
+.msg { max-width: 92%; }
+.msg.user { align-self: flex-end; background: #F0F0F0; color: var(--strong); padding: 9px 13px; border-radius: 14px 14px 4px 14px; }
+.msg.ai { align-self: flex-start; color: var(--strong); }
+.msg.ai .who { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+.msg.sys { align-self: stretch; max-width: none; background: var(--bad-soft); color: var(--bad); border-radius: 10px; padding: 9px 12px; font-size: 13px; }
+.msg.sys code { font: 12px ui-monospace, Menlo, monospace; }
+.msg.tried { align-self: stretch; max-width: none; display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--muted); border: 1px dashed var(--rule); border-radius: 10px; padding: 8px 12px; }
+.msg.tried b { color: var(--bad); font-weight: 500; white-space: nowrap; }
+
+.card { align-self: stretch; max-width: none; border: 1px solid #CFE3F4; background: var(--baby-soft); border-radius: 12px; padding: 14px; color: var(--ink); }
+.card h3 { margin: 0 0 8px; font-size: 14px; color: var(--strong); }
+.card p { margin: 0 0 10px; }
+.card .row { display: grid; grid-template-columns: 92px 1fr; gap: 8px; padding: 7px 0; border-top: 1px solid #D7E8F6; font-size: 13px; }
+.card .row > span:first-child { color: var(--muted); }
+.card ul { margin: 0; padding: 0; list-style: none; }
+.card li { padding: 1px 0; }
+.card li.no { color: var(--muted); }
+.meter { display: flex; align-items: center; gap: 8px; }
+.meter i { display: block; height: 6px; width: 90px; border-radius: 3px; background: #D2E4F3; overflow: hidden; }
+.meter i::after { content: ""; display: block; height: 100%; width: var(--v); background: var(--accent); }
+.actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.btn { border: 1px solid var(--rule); background: #fff; color: var(--strong); padding: 7px 12px; border-radius: 8px; font-size: 13px; }
+.btn.primary { background: var(--strong); border-color: var(--strong); color: #fff; }
+.btn:hover { border-color: #BDBDBD; }
+.btn.primary:hover { background: #000; }
+.btn:disabled { opacity: .45; cursor: default; }
+.why { display: none; margin-top: 10px; font-size: 13px; padding: 10px; border-radius: 8px; background: #fff; }
+.why.open { display: block; }
+.ways { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.way { text-align: left; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; border: 1px solid var(--rule); background: #fff; border-radius: 10px; padding: 10px 12px; color: var(--strong); }
+.way:hover { border-color: var(--accent); }
+.way small { grid-column: 1; color: var(--muted); font-size: 12.5px; }
+.way .cost { grid-row: 1; grid-column: 2; font-size: 12px; color: var(--muted); }
+.way .cost.free { color: var(--ok); }
+.done { align-self: stretch; max-width: none; border-radius: 10px; background: var(--ok-soft); color: var(--ok); padding: 10px 12px; font-size: 13px; }
+.done .files { color: var(--ink); margin-top: 6px; font: 12px ui-monospace, Menlo, monospace; }
+.done .actions { margin-top: 8px; }
+.compose { border-top: 1px solid var(--rule); padding: 10px; display: flex; gap: 6px; }
+.compose input { flex: 1; min-width: 0; border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; font: inherit; color: var(--strong); background: #fff; }
+.compose .btn { flex: none; }
+
+/* preview */
+.preview { background: #FBFAF7; position: relative; padding: 22px; display: flex; flex-direction: column; gap: 16px; }
+.p-label { position: absolute; top: 10px; right: 12px; font-size: 11px; color: var(--muted); letter-spacing: .02em; }
+.zone { position: relative; border-radius: 10px; outline: 1.5px dashed transparent; outline-offset: 4px; transition: outline-color .15s; }
+.lockable .zone:hover { outline-color: #9CC6EA; }
+.zone .lock { display: none; position: absolute; top: -12px; right: -6px; z-index: 2; border: 1px solid #9CC6EA; background: #fff; color: var(--accent); border-radius: 999px; padding: 3px 10px; font-size: 12px; }
+.lockable .zone:hover .lock, .zone.locked .lock { display: inline-block; }
+.zone.locked { outline-color: var(--accent); outline-style: solid; }
+.zone.locked .lock { background: var(--accent); color: #fff; border-color: var(--accent); }
+.n-head { display: flex; align-items: center; justify-content: space-between; }
+.n-head h4 { margin: 0; font-size: 20px; color: #3A3530; }
+.n-head .who { font-size: 12px; color: var(--muted); }
+.wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; min-height: 180px; }
+.note { padding: 14px; min-height: 110px; border-radius: 4px; color: #4A4238; font-size: 13px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+.note:nth-child(4n+1) { background: #FDE7D4; transform: rotate(-1deg); }
+.note:nth-child(4n+2) { background: #DDEFE6; transform: rotate(.8deg); }
+.note:nth-child(4n+3) { background: #E1ECF8; transform: rotate(-.5deg); }
+.note:nth-child(4n+4) { background: #FBF2D5; transform: rotate(1deg); }
+.playful .note { border-radius: 14px; }
+.playful .n-head h4 { font-style: italic; }
+.playful .add { background: #E46F4A; }
+.composer { display: flex; gap: 8px; }
+.composer input { flex: 1; border: 1px solid #E5E0D8; border-radius: 8px; padding: 9px 10px; background: #fff; font: inherit; }
+.add { border: 0; border-radius: 8px; padding: 9px 14px; background: #3A3530; color: #fff; }
+.broken { display: none; position: absolute; inset: 0; background: rgba(251,250,247,.92); align-items: center; justify-content: center; text-align: center; padding: 24px; }
+.broken.on { display: flex; }
+.broken div { max-width: 280px; }
+.broken strong { display: block; color: var(--bad); font-size: 15px; margin-bottom: 4px; }
+.banner { display: none; border-radius: 8px; background: var(--ok-soft); color: var(--ok); padding: 8px 12px; font-size: 13px; }
+.banner.on { display: block; }
+.hint { font-size: 12.5px; color: var(--muted); }
+.foot { margin: 0 16px 16px; font-size: 12px; color: var(--muted); }
+
+@media (max-width: 760px) {
+  .split { grid-template-columns: 1fr; }
+  .chat { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .log { max-height: none; }
+}
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="moments" role="group" aria-label="Moments">
+      <button data-m="1" aria-pressed="true">1. Before a fix</button>
+      <button data-m="2" aria-pressed="false">2. After two failed fixes</button>
+      <button data-m="3" aria-pressed="false">3. Lock what works</button>
+    </div>
+    <button class="reset" id="reset">Start this moment again</button>
+  </div>
+
+  <div class="app">
+    <div class="bar">
+      <span class="proj">notes-wall</span>
+      <span class="ver" id="ver">v14</span>
+      <span class="credits" id="credits">3 credits left</span>
+    </div>
+    <div class="split">
+      <section class="chat" aria-label="Chat with the AI">
+        <div class="log" id="log" aria-live="polite"></div>
+        <form class="compose" id="compose">
+          <input id="input" placeholder="Ask for a change…" autocomplete="off">
+          <button class="btn primary" type="submit">Send</button>
+        </form>
+      </section>
+      <section class="preview" id="preview" aria-label="App preview">
+        <span class="p-label">Preview</span>
+        <div class="banner" id="banner"></div>
+        <div class="zone" data-z="Header"><button class="lock" data-lock="Header">Lock</button>
+          <div class="n-head"><h4>Notes wall</h4><span class="who" id="whoami">Signed in as kritika</span></div>
+        </div>
+        <div class="zone" data-z="Note wall" style="flex:1"><button class="lock" data-lock="Note wall">Lock</button>
+          <div class="wall" id="wall"></div>
+        </div>
+        <div class="zone" data-z="Composer"><button class="lock" data-lock="Composer">Lock</button>
+          <div class="composer"><input placeholder="Leave a note" tabindex="-1"><button class="add" tabindex="-1">Add</button></div>
+        </div>
+        <div class="broken" id="broken"><div><strong>Couldn't load your notes</strong><span id="brokenText">Something went wrong after the last change.</span></div></div>
+      </section>
+    </div>
+  </div>
+  <p class="foot">Concept prototype by Kritika Singh. Not affiliated with or endorsed by Lovable. The project, files and errors are invented for the demo.</p>
+
+<script>
+const $ = s => document.querySelector(s);
+const log = $('#log'), wall = $('#wall'), preview = $('#preview');
+const NOTES = ['Pick up the prints on Friday', 'Hang the new print by the window', 'Thank you for the coffee!', 'Book the studio for Sunday'];
+let credits = 3, moment = 1, locked = new Set();
+
+function setCredits(n) {
+  credits = n;
+  const el = $('#credits');
+  el.textContent = n + (n === 1 ? ' credit left' : ' credits left');
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+}
+function notes(on) { wall.innerHTML = on ? NOTES.map(t => `<div class="note">${t}</div>`).join('') : ''; }
+function broken(on, text) { $('#broken').classList.toggle('on', on); if (text) $('#brokenText').textContent = text; }
+function banner(text) { const b = $('#banner'); b.classList.toggle('on', !!text); b.textContent = text || ''; }
+function add(html, cls) {
+  const d = document.createElement('div');
+  d.className = 'msg ' + cls; d.innerHTML = html;
+  log.appendChild(d); log.scrollTop = log.scrollHeight;
+  return d;
+}
+const user = t => add(t, 'user');
+const ai = t => add(`<div class="who">AI</div>${t}`, 'ai');
+function think(ms = 700) {
+  const d = ai('<span class="hint">Thinking…</span>');
+  return new Promise(r => setTimeout(() => { d.remove(); r(); }, ms));
+}
+function lockDisabled(on) { preview.classList.toggle('lockable', on); }
+
+/* ---------- Moment 1: before a fix ---------- */
+function m1() {
+  setCredits(3); $('#ver').textContent = 'v14'; notes(false); broken(true, 'The app signed you in, then failed to load anything.'); banner(''); lockDisabled(false);
+  user('Let people sign up and log in, and only see their own notes.');
+  ai('Done. I added sign up, log in and a profile page.');
+  add('Error after the last change: <code>relation "notes" does not exist</code>', 'sys');
+  const c = add(`
+    <h3>Before I fix this, here's my plan</h3>
+    <div class="row"><span>What broke</span><span>Login works, but the notes table was never created in the database, so loading notes fails right after you sign in.</span></div>
+    <div class="row"><span>How sure</span><span class="meter"><i style="--v:80%"></i>Fairly sure</span></div>
+    <div class="row"><span>I'll change</span><ul><li>A new <b>notes</b> table in the database</li><li>useNotes.ts, which loads your notes</li></ul></div>
+    <div class="row"><span>I won't touch</span><ul><li class="no">Login and sign up</li><li class="no">Layout and styles</li><li class="no">Notes you already have</li></ul></div>
+    <div class="row"><span>Cost</span><span>1 credit</span></div>
+    <div class="actions">
+      <button class="btn primary" data-a="fix">Fix it · 1 credit</button>
+      <button class="btn" data-a="why">Why do you think that?</button>
+      <button class="btn" data-a="wrong">That's not the problem</button>
+    </div>
+    <div class="why">The error names a table that doesn't exist. The logs show sign in succeeded, so login isn't the cause. If I'm wrong, the fix only adds a table, so it can't break what already works.</div>`, 'card');
+  c.addEventListener('click', async e => {
+    const a = e.target.dataset.a; if (!a) return;
+    if (a === 'why') { c.querySelector('.why').classList.toggle('open'); return; }
+    c.querySelectorAll('.btn').forEach(b => b.disabled = true);
+    if (a === 'wrong') { ai('Okay, I won\'t guess. What did you expect to happen, and what happened instead? Nothing will change until you tell me.'); $('#input').focus(); return; }
+    user('Fix it.'); await think(900);
+    setCredits(2); $('#ver').textContent = 'v15'; broken(false); notes(true);
+    add(`Fixed. Your notes load again.<div class="files">+ notes table (database)<br>~ src/hooks/useNotes.ts</div><div class="actions"><button class="btn" data-a="undo">Undo · free</button></div>`, 'done')
+      .addEventListener('click', ev => { if (ev.target.dataset.a === 'undo') { ev.target.disabled = true; $('#ver').textContent = 'v14'; notes(false); broken(true); ai('Undone. You\'re back on v14, exactly as it was. That didn\'t cost a credit.'); } });
+    ai('Nothing else was changed. Login, layout and your existing notes are exactly as they were.');
+  });
+}
+
+/* ---------- Moment 2: after two failed fixes ---------- */
+function m2() {
+  setCredits(1); $('#ver').textContent = 'v16'; notes(false); broken(true, 'Signed-in people still see an empty wall.'); banner(''); lockDisabled(false);
+  user('Let people sign up and log in, and only see their own notes.');
+  add('<span>Fix attempt 1: created the notes table</span><b>Still failing · 1 credit</b>', 'tried');
+  add('<span>Fix attempt 2: rewrote how notes load</span><b>Still failing · 1 credit</b>', 'tried');
+  const c = add(`
+    <h3>I'm stuck, so I've stopped</h3>
+    <p>I've tried twice and the notes still don't load. Another guess would probably cost you a credit without fixing it.</p>
+    <div class="row"><span>What I know</span><ul><li>✓ The notes table exists now</li><li>✓ Sign up and login work</li><li>✗ Signed-in people see no notes</li></ul></div>
+    <div class="row"><span>Unsure about</span><span>Whether your database rules let people read their own notes. I haven't checked them yet.</span></div>
+    <div class="row"><span>Spent so far</span><span>2 credits on this problem</span></div>
+    <div class="ways">
+      <button class="way" data-a="restore">Go back to v12, the last version that worked<small>Before login was added, 14:02. Later versions are kept, so you can come back.</small><span class="cost free">Free</span></button>
+      <button class="way" data-a="dig">Let me look deeper before changing anything<small>I'll read the database rules and explain what I find. You decide whether to fix.</small><span class="cost">1 credit</span></button>
+      <button class="way" data-a="tell">Tell me what you expected<small>Describe it in your own words and I'll check it against what I see.</small><span class="cost free">Free</span></button>
+    </div>`, 'card');
+  c.addEventListener('click', async e => {
+    const w = e.target.closest('[data-a]'); if (!w) return;
+    c.querySelectorAll('.way').forEach(b => b.disabled = true);
+    const a = w.dataset.a;
+    if (a === 'restore') {
+      user('Go back to v12.'); await think(600);
+      $('#ver').textContent = 'v12'; broken(false); notes(true); $('#whoami').textContent = 'No login yet';
+      banner('Restored v12. Versions 13 to 16 are kept in history.');
+      ai('You\'re back on v12, where everything worked. When you want to try login again, I\'ll check the database rules first.');
+    } else if (a === 'dig') {
+      user('Look deeper first.'); await think(1100);
+      setCredits(0);
+      const f = add(`
+        <h3>Found it</h3>
+        <p>The rules only let people read notes they <b>own</b>. Your four existing notes were made before login existed, so they have no owner, and nobody can see them.</p>
+        <div class="row"><span>How sure</span><span class="meter"><i style="--v:95%"></i>Very sure</span></div>
+        <div class="row"><span>Fix</span><span>Make you the owner of the four existing notes. Nothing else changes.</span></div>
+        <div class="actions"><button class="btn primary" disabled>Fix it · 1 credit</button><span class="hint">You're out of credits. Your project is safe, and this plan will be here when you top up.</span></div>`, 'card');
+    } else {
+      $('#input').value = 'When I log in I expected to see my four notes, but the wall is empty.';
+      $('#input').focus();
+      ai('Go ahead. I\'ve started it for you, so edit it if it\'s not quite right.');
+    }
+  });
+}
+
+/* ---------- Moment 3: lock what works ---------- */
+function m3() {
+  setCredits(3); $('#ver').textContent = 'v12'; notes(true); broken(false); banner(''); $('#whoami').textContent = 'Signed in as kritika';
+  locked.clear(); document.querySelectorAll('.zone').forEach(z => { z.classList.remove('locked'); z.querySelector('.lock').textContent = 'Lock'; });
+  preview.classList.remove('playful'); lockDisabled(true);
+  ai('Your notes wall is working. Hover over any part of the preview to lock it. I won\'t change anything locked unless you say so.');
+  $('#input').value = 'Make the whole app feel more playful';
+  add('<span class="hint">Try it: lock the Note wall, then send the message below.</span>', 'ai');
+}
+document.addEventListener('click', e => {
+  const l = e.target.dataset.lock; if (!l || moment !== 3) return;
+  const z = e.target.closest('.zone');
+  if (locked.has(l)) { locked.delete(l); z.classList.remove('locked'); e.target.textContent = 'Lock'; }
+  else { locked.add(l); z.classList.add('locked'); e.target.textContent = '🔒 Locked'; }
+});
+
+$('#compose').addEventListener('submit', async e => {
+  e.preventDefault();
+  const t = $('#input').value.trim(); if (!t) return;
+  $('#input').value = ''; user(t);
+  if (moment !== 3) { await think(); ai('Thanks, that helps. In the full flow I\'d compare this with what I see before changing anything.'); return; }
+  await think(800);
+  const all = ['Header', 'Note wall', 'Composer'];
+  const change = all.filter(z => !locked.has(z));
+  const keep = all.filter(z => locked.has(z));
+  const c = add(`
+    <h3>Here's what I'd change</h3>
+    <div class="row"><span>I'll change</span><ul>${change.map(z => `<li>${z}: rounder shapes, warmer colour</li>`).join('') || '<li class="no">Nothing. Everything is locked.</li>'}</ul></div>
+    <div class="row"><span>Locked</span><ul>${keep.map(z => `<li class="no">🔒 ${z}, left exactly as it is</li>`).join('') || '<li class="no">Nothing locked. Want to lock anything first?</li>'}</ul></div>
+    <div class="row"><span>Cost</span><span>1 credit</span></div>
+    <div class="actions"><button class="btn primary" data-a="go" ${change.length ? '' : 'disabled'}>Go ahead · 1 credit</button>${keep.length ? '<button class="btn" data-a="unlock">Include locked parts this time</button>' : ''}</div>`, 'card');
+  c.addEventListener('click', async ev => {
+    const a = ev.target.dataset.a; if (!a) return;
+    c.querySelectorAll('.btn').forEach(b => b.disabled = true);
+    if (a === 'unlock') { ai('Okay, just for this change. They\'ll be locked again afterwards.'); }
+    await think(800); setCredits(2); $('#ver').textContent = 'v13';
+    preview.classList.add('playful');
+    if (a === 'go' && locked.has('Note wall')) wall.querySelectorAll('.note').forEach(n => n.style.borderRadius = '4px');
+    else wall.querySelectorAll('.note').forEach(n => n.style.borderRadius = '');
+    add(`Done.${keep.length && a === 'go' ? ' Locked parts weren\'t touched.' : ''}<div class="actions"><button class="btn">Undo · free</button></div>`, 'done')
+      .querySelector('.btn').addEventListener('click', ev2 => { ev2.target.disabled = true; preview.classList.remove('playful'); wall.querySelectorAll('.note').forEach(n => n.style.borderRadius = ''); $('#ver').textContent = 'v12'; ai('Undone, free.'); });
+  });
+});
+
+function start(m) {
+  moment = m; log.innerHTML = '';
+  document.querySelectorAll('.moments button').forEach(b => b.setAttribute('aria-pressed', b.dataset.m == m));
+  $('#whoami').textContent = 'Signed in as kritika';
+  [m1, m2, m3][m - 1]();
+}
+document.querySelectorAll('.moments button').forEach(b => b.addEventListener('click', () => start(+b.dataset.m)));
+$('#reset').addEventListener('click', () => start(moment));
+const q = +new URLSearchParams(location.search).get('m');
+start(q >= 1 && q <= 3 ? q : 1);
+</script>
+</body>
+</html>

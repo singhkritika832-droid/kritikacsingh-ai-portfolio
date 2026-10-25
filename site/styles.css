@@ -526,3 +526,14 @@ figure.sticky:hover { transform: rotate(0) translateY(-3px); box-shadow: 0 14px 
 
 /* Hero sub-line */
 .intro-side .hero-sub { margin: clamp(20px, 3vw, 32px) 0 0; max-width: 46ch; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.5; color: var(--muted); }
+
+/* Concept card: lilac to baby blue */
+.slab-stuck {
+  --slab-ink: #3A3A52; --slab-muted: #63637A; --slab-line: #3A3A52;
+  background:
+    radial-gradient(120% 90% at 100% 0%, #E6E1F5 0%, rgba(230,225,245,0) 60%),
+    radial-gradient(90% 80% at 0% 100%, #DCEBFA 0%, rgba(220,235,250,0) 60%),
+    #F3F2F8;
+}
+.slab-stuck .shot { background: none; }
+.slab-stuck .shot img { border-radius: 12px; box-shadow: 0 0 0 1px rgba(58,58,82,.08), 0 24px 60px rgba(58,58,110,.16); }
