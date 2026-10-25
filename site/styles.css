@@ -523,3 +523,6 @@ figure.sticky:hover { transform: rotate(0) translateY(-3px); box-shadow: 0 14px 
 .site-head nav { gap: clamp(4px, 1.2vw, 14px); }
 .site-head .name { margin-right: auto; }
 @media (max-width: 420px) { .site-head nav a { padding: 4px 8px; } }
+
+/* Hero sub-line */
+.intro-side .hero-sub { margin: clamp(20px, 3vw, 32px) 0 0; max-width: 46ch; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.5; color: var(--muted); }
